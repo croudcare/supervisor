@@ -1,4 +1,5 @@
 require 'erb'
+require 'pry'
 
 class Template
 
@@ -9,13 +10,17 @@ class Template
 
   def render(locals, output)
     File.open(output, 'w') do |f|
-      f.write @renderer.result(locals)
+      f.write @renderer.result( view_data(locals) )
     end
+  end
+
+  def view_data(locals)
+    OpenStruct.new(locals).instance_eval { binding }
   end
 
   private
   def folder
-    File.expand_path("templates", __FILE__)
+     File.join(File.expand_path("../..", __FILE__), "templates")
   end
 
 end

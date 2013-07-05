@@ -1,26 +1,37 @@
 class Environment
 
-  def self.config
+  def self.configuration
     @config
   end
 
-  def self.condif(&block)
-    @config =  DSL.new.instance_eval &block
+  def self.config(&block)
+    @config = DSL.new
+    @config.instance_eval &block
   end
 
   class DSL
+
     attr_accessor :rails_root, :rails_shared, :env
-    def rails_root(value)
-      @rails_root = value
+
+    def initialize
+      @rails_root , @rails_shared , @env  = nil, nil, nil
     end
 
-    def rails_shared(value)
-      @rails_shared = value
+    def rails_root(value=nil)
+      @rails_root = value if @rails_root.nil?
+      @rails_root
     end
 
-    def env(value)
-      @env = value
+    def rails_shared(value=nil)
+      @rails_shared = value if @rails_shared.nil?
+      @rails_shared
     end
+
+    def env(value=nil)
+      @env = value if @env.nil?
+      @env
+    end
+
   end
 
 end

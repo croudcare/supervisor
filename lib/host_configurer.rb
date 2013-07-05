@@ -1,4 +1,4 @@
-require_relative './godder'
+require_relative './goder'
 require_relative './initd'
 
 module HostConfigurer
@@ -11,10 +11,10 @@ module HostConfigurer
 
   private
   def copy_god_conf
-    Godder.new(Environment.config).run
+    ::Goder.new(Environment.configuration).run
   end
 
   def setup_init_d
-    Initd.new(Environment.config).run
+    ::Initd.new(Environment.configuration).run
   end
 end

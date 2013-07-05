@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative 'lib/environment'
-require_relative 'lib/installer'
+require_relative 'lib/host_configurer'
 include HostConfigurer
 
 raise 'Must run as ROOT' unless Process.uid == 0
@@ -15,4 +15,3 @@ Environment.config do
 end
 
 configure_host
-
