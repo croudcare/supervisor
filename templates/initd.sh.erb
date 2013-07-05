@@ -1,0 +1,50 @@
+#!/bin/bash -l
+
+NAME=god
+DESC=god
+DEAMON=/usr/local/bin/god
+PID=/var/run/god/god.pid
+LOG=/var/log/god.log
+GOD_CONFIG=/etc/god/god.conf
+
+set -e
+
+test -x $DEAMON || exit 0
+
+. /lib/lsb/init-functions
+
+RETVAL=0
+
+case "$1" in
+start)
+  echo -n "Starting $DESC: "
+  $DEAMON -c $GOD_CONFIG -P $PID -l $LOG
+  RETVAL=$?
+  echo "$NAME."
+
+  ;;
+stop)
+  echo -n "Stopping $DESC: "
+  kill `cat $PID`
+  RETVAL=$?
+  echo "$NAME."
+  ;;
+restart)
+  echo -n "Restarting $DESC: "
+  kill `cat $PID`
+  $DEAMON -c $GOD_CONFIG -P $PID -l $LOG
+
+  RETVAL=$?
+  echo "$NAME."
+  ;;
+status)
+  $DEAMON status
+  RETVAL=$?
+  ;;
+*)
+  echo "Usage: god {start|stop|restart|status}"
+  exit 1
+  ;;
+esac
+
+exit $RETVAL
