@@ -9,7 +9,6 @@ class Goder
 
   def run
     FileUtils.cp_r @god_folder, "/etc/god"
-    puts "GOD DONE"
   end
 
 end

@@ -1,5 +1,5 @@
 require 'erb'
-require 'pry'
+require 'ostruct'
 
 class Template
 
@@ -15,7 +15,7 @@ class Template
   end
 
   def view_data(locals)
-    OpenStruct.new(locals).instance_eval { binding }
+    ::OpenStruct.new(locals).instance_eval { binding }
   end
 
   private
