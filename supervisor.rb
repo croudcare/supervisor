@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/configurator'
-require_relative '../lib/host_configurer'
+require_relative 'lib/configurator'
+require_relative 'lib/host_configurer'
 include HostConfigurer
 
 raise 'Must run as ROOT' unless Process.uid == 0
